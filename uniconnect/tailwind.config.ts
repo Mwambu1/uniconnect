@@ -15,6 +15,7 @@ const config: Config = {
       },
     },
   },
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './node_modules/react-icons/lib/esm/*.{js,jsx,ts,tsx}'],
   plugins: [],
 };
 export default config;
