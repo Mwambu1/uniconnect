@@ -1,5 +1,8 @@
+"use client"
 import NavigationBar from "@/lib/components/NavigationBar";
 import PersonalInfoCard from "@/lib/components/PersonalInfoCard";
+import { appRoutes } from "@/lib/routes";
+import { useRouter } from "next/navigation";
 import { BiLogOut, BiSupport } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
@@ -9,9 +12,9 @@ import { MdGroups, MdPages, MdPersonAddAlt1 } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 
 export default function Profile() {
+    const router = useRouter()
     return(
         <div className="flex flex-col gap-3 p-3 bg-gray-200 shadow-xl min-h-screen">
-            <NavigationBar/>
             <div className="flex w-full gap-3">
                 <div className="flex flex-col gap-3 w-[45%]">
                     <div>
@@ -95,7 +98,7 @@ export default function Profile() {
                             <FcFeedback/>
                             <h1>Give feedback</h1>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div onClick={()=>appRoutes.home} className="flex items-center gap-3">
                             <BiLogOut></BiLogOut>
                             <h1>Logout</h1>
                         </div>
