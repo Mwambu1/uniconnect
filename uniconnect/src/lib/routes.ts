@@ -1,3 +1,4 @@
 export const appRoutes = {
-    feed: "/pages/feed"
+    feed: "/pages/feed",
+    profile: "/pages/profile"
 }
