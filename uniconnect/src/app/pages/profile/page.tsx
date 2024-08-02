@@ -73,32 +73,32 @@ export default function Profile() {
                     </div>
                 </div>
                 <div className="bg-white rounded-lg p-3 w-[20%] h-fit">
-                    <div className="flex justify-start items-center p-3 rounded-lg gap-3 shadow-xl">
+                    <div className="flex justify-start items-center p-3 rounded-lg gap-3 shadow-xl cursor-pointer">
                         <RxAvatar className="h-10 w-10"/>
                         <h1>Mwambu Kaumba</h1>
                     </div>
                     <div className="pt-5 flex flex-col gap-5 p-3">
-                       <div className="flex items-center gap-3">
+                       <div onClick={()=> router.push(appRoutes.groups)} className="flex items-center gap-3 cursor-pointer">
                             <MdGroups/>
                             <h1>Groups</h1>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div onClick={()=> router.push(appRoutes.pages)} className="flex items-center gap-3 cursor-pointer">
                             <MdPages/>
                             <h1>Pages</h1>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div onClick={()=> router.push(appRoutes.settings)} className="flex items-center gap-3 cursor-pointer">
                             <CiSettings/>
                             <h1>Settings</h1>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div onClick={()=> router.push(appRoutes.help)} className="flex items-center gap-3 cursor-pointer">
                             <BiSupport/>
                             <h1>Help and Support</h1>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div onClick={()=> router.push(appRoutes.feedback)} className="flex items-center gap-3 cursor-pointer">
                             <FcFeedback/>
                             <h1>Give feedback</h1>
                         </div>
-                        <div onClick={()=>appRoutes.home} className="flex items-center gap-3">
+                        <div onClick={()=>appRoutes.home} className="flex items-center gap-3 cursor-pointer">
                             <BiLogOut></BiLogOut>
                             <h1>Logout</h1>
                         </div>
