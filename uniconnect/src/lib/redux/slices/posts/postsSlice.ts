@@ -13,10 +13,11 @@ export const getPosts = createAsyncThunk(
     'posts/fetchPosts',
     async () => {
         const response = await fetchPosts(); // Adjust the URL to your API endpoint
-        return response.map((post: any) => ({
-            ...post,
-            created_at: post.created_at.toDate().toISOString() // Convert Timestamp to ISO string
-        }))
+        console.log(response);
+        // return response.map((post: any) => ({
+        //     ...post,
+        //     created_at: post.created_at.toDate().toISOString() // Convert Timestamp to ISO string
+        // }))
     }
 );
 
@@ -29,7 +30,7 @@ export const posts = createSlice({
         }
     }, extraReducers(builder) {
         builder.addCase(getPosts.fulfilled, (state,action) => {
-            state.posts = action.payload
+            //state.posts = action.payload
         })
     },
 })

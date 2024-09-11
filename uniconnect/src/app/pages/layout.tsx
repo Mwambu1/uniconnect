@@ -3,8 +3,10 @@ import MessagesList from "@/lib/components/MessagesList";
 import NavigationBar from "@/lib/components/NavigationBar";
 import NotificationCard from "@/lib/components/NotificationCard";
 import Notifications from "@/lib/components/Notifications";
+import { fetchPosts } from "@/lib/firebase/firestore/firestore";
 import { selectMessagesToggle, selectNotificationsToggle } from "@/lib/redux/slices/ToggleComponentSlice/selectors";
 import { Inter } from "next/font/google";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,6 +18,9 @@ export default function Layout({
   }>) {
     const showNotifications = useSelector(selectNotificationsToggle)
     const showMessages = useSelector(selectMessagesToggle)
+    useEffect(() => {
+        fetchPosts();
+    }, []);
     return(
         <div className="relative z-0">
             <div className="relative z-10 pl-3 pt-3 pr-3 bg-gray-200">

@@ -6,24 +6,51 @@ import { FaLocationPin } from "react-icons/fa6";
 import { FcGallery } from "react-icons/fc";
 import { RxAvatar } from "react-icons/rx";
 import { createApost } from "../firebase/firestore/firestore"; // Assuming you want to use createPost here
+import Image from "next/image";
+import { Bars, ThreeDots } from 'react-loading-icons'
+import Circles from "react-loading-icons/dist/esm/components/circles";
 
 export default function MakeApost() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [postContent, setPostContent] = useState(""); // State to store input value
   const [imageUpload, setImageUpload] = useState<File>();
+  const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(null);
+  const [uploading, setUploading] = useState(true);
+  const [uploadStatus, setUploadStatus] = useState("");
 
   const handlePost = async () => {
-      const res = await createApost(postContent, imageUpload!)
-      if(res=="success") {
-        setPostContent("");
-      }
-  }
+    setUploading(false);
+    if (!imageUpload) return; // Ensure there's an image to upload
+    const res = await createApost(postContent, imageUpload);
+    if (res === "success") {
+      setPostContent("");
+      setUploadStatus(res);
+      setSelectedImage(null); // Clear selected image after posting
+      setUploading(true);
+      setTimeout(()=>{
+        setUploadStatus("")
+      }, 3000)
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUploading(true);
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+      setImageUpload(file); // Set the file for uploading
+    }
+  };
 
   const handleClick = () => {
     if (fileInputRef.current) {
-        fileInputRef.current.click();
+      fileInputRef.current.click();
     }
-};
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-xl p-5 w-full">
@@ -36,16 +63,40 @@ export default function MakeApost() {
           value={postContent} // Bind input to state
           onChange={(e) => setPostContent(e.target.value)} // Update state on input change
         />
-        <input 
-        type="file"
-        style={{ display: "none" }}
-        ref={fileInputRef}
-        accept="image/*" onChange={(event)=>{ const file = event.target.files && event.target.files[0];
-            if (file) {
-              setImageUpload(file); // Ensure file is not null before setting state
-            }}}/>
+        <input
+          type="file"
+          style={{ display: "none" }}
+          ref={fileInputRef}
+          accept="image/*"
+          onChange={handleFileChange}
+        />
       </div>
-      <div className="flex justify-end items-center gap-5 w-full p-5">
+      <div className="flex justify-between items-center gap-5 w-full pt-5">
+        <div className="w-full">
+          {!uploading && (
+            <div className="w-full">
+              <ThreeDots className="h-7 w-full bg-sky-400 py-2 rounded-lg"/>
+            </div>
+          )
+          }
+          { ( uploadStatus == "success") && (
+            <div className="w-full">
+              <p className="text-green-600 text-xs">Successfully created post!</p>
+            </div>
+          )
+          }
+        {selectedImage && uploading && (
+          <div className="relative w-7 h-5 rounded-xl"> {/* Adjust width and height as needed */}
+            <Image
+              src={selectedImage as string}
+              alt="Selected"
+              layout="fill" // Ensure it covers the container
+              objectFit="cover" // Adjust to fit the container
+            />
+          </div>
+        )}
+        </div>
+        <div className="flex justify-end items-center gap-5">
         <div className="">
           <div className="flex justify-center">
             <BiVideo />
@@ -54,8 +105,7 @@ export default function MakeApost() {
         </div>
         <div>
           <div className="flex justify-center">
-            <FcGallery onClick={handleClick}
-            style={{ cursor: "pointer" }} />
+            <FcGallery onClick={handleClick} style={{ cursor: "pointer" }} />
           </div>
           <h1 className="text-xs text-gray-400">Photos</h1>
         </div>
@@ -77,6 +127,7 @@ export default function MakeApost() {
         >
           Post
         </button>
+        </div>
       </div>
     </div>
   );

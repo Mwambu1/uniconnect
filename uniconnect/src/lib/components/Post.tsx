@@ -21,7 +21,7 @@ export default function Post({ data }: { data: any }) {
                     <RxAvatar className="h-10 w-10"/>
                     <div>
                         <h1 className="font-extrabold text-blue-500">Mwambu Kaumba</h1>
-                        <h1 className="font-semibold text-xs text-gray-500">{data.created_at.toDate().toLocaleDateString()}</h1>
+                        <h1 className="font-semibold text-xs text-gray-500">{data.created_at}</h1>
                     </div>
                 </div>
                 <BiDotsVerticalRounded/>
