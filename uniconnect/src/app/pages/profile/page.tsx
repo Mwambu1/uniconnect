@@ -14,9 +14,9 @@ import { RxAvatar } from "react-icons/rx";
 export default function Profile() {
   const router = useRouter();
   return (
-    <div className="flex flex-col gap-3 p-3 bg-gray-200 shadow-xl min-h-screen">
-      <div className="flex w-full gap-3">
-        <div className="flex flex-col gap-3 w-[45%]">
+    <div className="flex flex-col gap-3 p-3 bg-gray-200 shadow-xl w-full min-h-screen">
+      <div className="xl:flex grid grid-cols-1 w-full gap-3">
+        <div className="flex flex-col gap-3 xl:w-[45%]">
           <div>
             <PersonalInfoCard />
           </div>
@@ -49,7 +49,7 @@ export default function Profile() {
             </div>
           </div>
         </div>
-        <div className=" flex flex-col gap-3 w-[35%]">
+        <div className=" flex flex-col gap-3 xl:w-[35%]">
           <div className="flex flex-col gap-3 bg-white rounded-lg p-3">
             <h1 className="font-extrabold">Bio</h1>
             <h1>Write something about yourself</h1>
@@ -93,7 +93,7 @@ export default function Profile() {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg p-3 w-[20%] h-fit">
+        <div className="bg-white rounded-lg p-3 xl:w-[20%] h-fit">
           <div className="flex justify-start items-center p-3 rounded-lg gap-3 shadow-xl cursor-pointer">
             <RxAvatar className="h-10 w-10" />
             <h1 className="text-black">Mwambu Kaumba</h1>

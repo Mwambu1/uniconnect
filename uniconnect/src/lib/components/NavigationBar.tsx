@@ -34,41 +34,41 @@ export default function NavigationBar() {
        console.log("Notifications toggle value is",notificationsToggleValue)
     },[notificationsToggleValue])
     return(
-        <div className="relative z-30 p-5 rounded-lg overflow-clip flex h-fit bg-white justify-between">
+        <div className="relative gap-10 z-30 p-5 rounded-lg xl:overflow-clip flex h-fit bg-white justify-between">
             <div className="flex justify-center items-center gap-1">
                 <Image src="/unza_logo.png" alt="unza logo" width={25} height={25}/>
-                <h1 className="font-extrabold text-gray-500">UNICONNECT</h1>
+                <h1 className="text-xs font-extrabold text-gray-500">UNICONNECT</h1>
             </div>
-            <div className="flex justify-evenly items-center px-10">
+            <div className="hidden xl:visible xl:flex justify-evenly items-center px-10">
                 <div className="flex justify-center items-center gap-1">
                     <input type="search" className="bg-gray-100 text-black rounded-full text-xs p-2" placeholder="Search..."></input>
                     <button><BiSearch/></button>
                 </div>
             </div>
-            <div className="flex justify-evenly items-center px-10">
-                    <div onClick={()=>router.push(appRoutes.feed)} className="px-5 hover:bg-blue-100 p-1 rounded-lg">
+            <div className="flex w-full justify-evenly items-center xl:px-10">
+                    <div onClick={()=>router.push(appRoutes.feed)} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
-                            <IoHomeSharp className="text-blue-400"/>
+                            <IoHomeSharp className="text-blue-400 text-sm"/>
                         </div>
-                        <h1 className="text-xs text-gray-400">Home</h1>
+                        <h1 className="hidden xl:visible text-xs text-gray-400">Home</h1>
                     </div>
-                   <div onClick={()=> toggleNotification()} className="px-5 hover:bg-blue-100 p-1 rounded-lg">
+                   <div onClick={()=> toggleNotification()} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
-                            <IoIosNotifications className="text-blue-400"/>
+                            <IoIosNotifications className="text-blue-400 text-md"/>
                         </div>
-                        <h1 className="text-xs text-gray-400">Notifications</h1>
+                        <h1 className="hidden xl:visible text-xs text-gray-400">Notifications</h1>
                     </div>
-                    <div className="px-5 hover:bg-blue-100 p-1 rounded-lg">
+                    <div className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
-                            <GrAnnounce className="text-blue-400"/>
+                            <GrAnnounce className="text-blue-400 text-md"/>
                         </div>
-                        <h1 className="text-xs text-gray-400">Announcements</h1>
+                        <h1 className="hidden xl:visible text-xs text-gray-400">Announcements</h1>
                     </div>
-                    <div onClick={()=> toggleMessages()} className="px-5 hover:bg-blue-100 p-1 rounded-lg">
+                    <div onClick={()=> toggleMessages()} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
-                            <MdMessage className="text-blue-400"/>
+                            <MdMessage className="text-blue-400 text-md"/>
                         </div>
-                        <h1 className="text-xs text-gray-400">Messages</h1>
+                        <h1 className="hidden xl:visible text-xs text-gray-400">Messages</h1>
                     </div>
             </div>
             <div className="flex justify-center items-center">

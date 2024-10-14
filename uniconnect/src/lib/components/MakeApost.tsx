@@ -53,12 +53,12 @@ export default function MakeApost() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-xl p-5 w-full">
-      <h1 className="pb-1">Create a post</h1>
+    <div className="bg-white rounded-lg shadow-xl p-3 xl:p-5 w-full">
+      <h1 className="pb-1 text-xs">Create a post</h1>
       <div className="flex items-center gap-2">
-        <RxAvatar className="h-14 w-14 text-gray-400" />
+        <RxAvatar className="h-14 w-14 text-xs text-gray-400" />
         <input
-          className="bg-gray-100 w-full p-3 rounded-lg"
+          className="bg-gray-100 h-10 w-full p-3 rounded-lg"
           placeholder="Write something..."
           value={postContent} // Bind input to state
           onChange={(e) => setPostContent(e.target.value)} // Update state on input change
@@ -71,7 +71,7 @@ export default function MakeApost() {
           onChange={handleFileChange}
         />
       </div>
-      <div className="flex justify-between items-center gap-5 w-full pt-5">
+      <div className="flex justify-between items-center gap-5 w-full xl:pt-5">
         <div className="w-full">
           {!uploading && (
             <div className="w-full">
