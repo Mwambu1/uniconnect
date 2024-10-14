@@ -72,7 +72,7 @@ export default function NavigationBar() {
                     </div>
             </div>
             <div className="flex justify-center items-center">
-                <RxAvatar onClick={()=>router.push(appRoutes.profile)} className="h-7 w-7"/>
+                <RxAvatar onClick={()=>router.push(appRoutes.profile)} className="h-7 w-7 text-black"/>
             </div>
         </div>
     )
