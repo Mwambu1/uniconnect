@@ -31,25 +31,27 @@ export default function Home() {
   };
 
   return (
-    <main className="flex max-h-screen items-center bg-white justify-between p-24">
+    <main className="grid grid-cols-1 xl:flex max-h-screen items-center bg-white justify-between xl:p-24">
       <div className="flex flex-col gap-3 p-10">
-        <Image className="flex justify-center bg-transparent" src="/unza_logo.png" alt="unza logo" width={200} height={400}></Image>
-        <h1 className="text-gray-800">Welcome to <span className="font-extrabold text-gray-400">UNICONNECT</span></h1>
+        <div className="flex justify-center">
+          <Image className="flex justify-center bg-transparent" src="/unza_logo.png" alt="unza logo" width={200} height={400}></Image>
+        </div>
+        <h1 className="text-gray-800 text-center">Welcome to <span className="font-extrabold text-gray-400">UNICONNECT</span></h1>
       </div>
       
-      <div className="relative flex flex-col text-gray-700 bg-transparent shadow-xl p-5 rounded-xl bg-clip-border">
-        <h4 className="block font-sans text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+      <div className="relative m-5 flex flex-col text-gray-700 bg-transparent shadow-xl p-5 rounded-xl bg-clip-border">
+        <h4 className="block font-sans text-center text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
           Sign Up
         </h4>
-        <p className="block mt-1 font-sans text-xs antialiased font-normal leading-relaxed text-gray-700">
+        <p className="block text-center mt-1 font-sans text-xs antialiased font-normal leading-relaxed text-gray-700">
           Nice to meet you! Enter your details to register.
         </p>
-        <form className="max-w-screen-lg mt-2 mb-2 w-80 sm:w-96" onSubmit={(e) => e.preventDefault()}>
+        <form className="xl:max-w-screen-lg mt-2 mb-2 sm:w-96" onSubmit={(e) => e.preventDefault()}>
           <div className="flex flex-col gap-3 mb-1">
             <h6 className="block -mb-3 font-sans text-sm antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
               Your Email
             </h6>
-            <div className="relative h-8 w-full min-w-[200px]">
+            <div className="relative h-8 w-full xl:min-w-[200px]">
               <input 
                 placeholder="name@mail.com"
                 value={email}  // Bind input value to email state
