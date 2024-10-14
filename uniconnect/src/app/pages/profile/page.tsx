@@ -31,9 +31,9 @@ export default function Profile() {
             <div className="flex justify-between">
               <div>
                 <h1 className="font-extrabold text-blue-400">Mwambu Kaumba</h1>
-                <h1 className="text-sm">Program: Computer Science</h1>
-                <h1 className="text-sm">School: School of Natural Sciences</h1>
-                <h1 className="flex items-center text-sm">Year of Study: 4</h1>
+                <h1 className="text-sm text-black">Program: Computer Science</h1>
+                <h1 className="text-sm text-black">School: School of Natural Sciences</h1>
+                <h1 className="flex items-center text-sm text-black">Year of Study: 4</h1>
               </div>
               <div className="relative flex justify-end pr-5 text-blue-500">
                 <MdPersonAddAlt1 className="absolute rounded-full shadow-xl p-2 h-10 w-10 top-0" />
@@ -41,7 +41,7 @@ export default function Profile() {
             </div>
             <div>
               <h1 className="italic text-xs">
-                <p>
+                <p className="text-black">
                 I like to program, play basketball, chess, pencil draw and
                 read.
                 </p>
@@ -51,8 +51,8 @@ export default function Profile() {
         </div>
         <div className=" flex flex-col gap-3 xl:w-[35%]">
           <div className="flex flex-col gap-3 bg-white rounded-lg p-3">
-            <h1 className="font-extrabold">Bio</h1>
-            <h1>Write something about yourself</h1>
+            <h1 className="font-extrabold text-black">Bio</h1>
+            <h1 className="text-black">Write something about yourself</h1>
             <button className="bg-white border-2 rounded-lg p-2 text-black shadow-xl">
               Update Bio
             </button>
@@ -95,7 +95,7 @@ export default function Profile() {
         </div>
         <div className="bg-white rounded-lg p-3 xl:w-[20%] h-fit">
           <div className="flex justify-start items-center p-3 rounded-lg gap-3 shadow-xl cursor-pointer">
-            <RxAvatar className="h-10 w-10" />
+            <RxAvatar className="h-10 w-10 text-black" />
             <h1 className="text-black">Mwambu Kaumba</h1>
           </div>
           <div className="pt-5 flex flex-col gap-5 p-3">
