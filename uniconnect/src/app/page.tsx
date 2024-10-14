@@ -39,7 +39,7 @@ export default function Home() {
         <h1 className="text-gray-800 text-center">Welcome to <span className="font-extrabold text-gray-400">UNICONNECT</span></h1>
       </div>
       
-      <div className="relative m-5 flex flex-col text-gray-700 bg-transparent shadow-xl p-5 rounded-xl bg-clip-border">
+      <div className="relative m-5 border-t-black flex flex-col text-gray-700 bg-transparent shadow-xl p-5 rounded-xl bg-clip-border">
         <h4 className="block font-sans text-center text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
           Sign Up
         </h4>
@@ -56,7 +56,7 @@ export default function Home() {
                 placeholder="name@mail.com"
                 value={email}  // Bind input value to email state
                 onChange={(e) => setEmail(e.target.value)}  // Update state on change
-                className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent !border-t-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" 
+                className="peer text-black h-full w-full rounded-md border border-blue-gray-200 border-t-transparent !border-t-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" 
               />
             </div>
             
@@ -69,7 +69,7 @@ export default function Home() {
                 placeholder="********"
                 value={password}  // Bind input value to password state
                 onChange={(e) => setPassword(e.target.value)}  // Update state on change
-                className="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent !border-t-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" 
+                className="peer text-black h-full w-full rounded-md border border-blue-gray-200 border-t-transparent !border-t-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" 
               />
             </div>
           </div>
