@@ -14,10 +14,6 @@ export const getPosts = createAsyncThunk(
     async () => {
         const response = await fetchPosts(); // Adjust the URL to your API endpoint
         console.log(response);
-        // return response.map((post: any) => ({
-        //     ...post,
-        //     created_at: post.created_at.toDate().toISOString() // Convert Timestamp to ISO string
-        // }))
     }
 );
 
