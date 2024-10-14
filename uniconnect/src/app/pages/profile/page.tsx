@@ -41,8 +41,10 @@ export default function Profile() {
             </div>
             <div>
               <h1 className="italic text-xs">
-                "I like to program, play basketball, chess, pencil draw and
-                read."
+                <p>
+                I like to program, play basketball, chess, pencil draw and
+                read.
+                </p>
               </h1>
             </div>
           </div>
