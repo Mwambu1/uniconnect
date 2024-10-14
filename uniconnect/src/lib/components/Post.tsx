@@ -14,8 +14,8 @@ export default function Post({ data }: { data: any }) {
     const hasMedia = data.media_url && data.media_url.length > 0;
 
     return (
-        <div className="flex flex-col bg-white p-5 rounded-lg">
-            <div className="flex justify-between">
+        <div className="flex flex-col bg-white xl:p-5 rounded-lg">
+            <div className="flex justify-between p-2">
                 <div className="flex justify-center items-center gap-2">
                    
                     <div className="relative w-10 h-10 rounded-full bg-gray-400 overflow-hidden">
@@ -33,7 +33,7 @@ export default function Post({ data }: { data: any }) {
                 </div>
                 <BiDotsVerticalRounded/>
             </div>
-            <div className="py-2">
+            <div className="py-2 px-2 text-black">
                 <h1>{data.content}</h1>
             </div>
             {hasMedia && (
@@ -45,7 +45,7 @@ export default function Post({ data }: { data: any }) {
                     objectFit="contain"/>
                 </div>
             )}
-            <div className="flex justify-end gap-10 pt-5">
+            <div className="flex justify-end gap-10 pt-5 px-5 pb-5">
                 <div className="grid justify-center items-center">
                     <div className="flex justify-center items-center">
                        { !showReactions? <IoMdThumbsUp onClick={() => setShowReactions(!showReactions)}/>:
