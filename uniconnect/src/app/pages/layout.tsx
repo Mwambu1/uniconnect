@@ -1,7 +1,6 @@
 "use client"
 import MessagesList from "@/lib/components/MessagesList";
 import NavigationBar from "@/lib/components/NavigationBar";
-import NotificationCard from "@/lib/components/NotificationCard";
 import Notifications from "@/lib/components/Notifications";
 import { fetchPosts } from "@/lib/firebase/firestore/firestore";
 import { selectMessagesToggle, selectNotificationsToggle } from "@/lib/redux/slices/ToggleComponentSlice/selectors";

@@ -1,6 +1,7 @@
 export const appRoutes = {
     home: "/",
     feed: "/pages/feed",
+    createAccount: "/pages/create-account",
     profile: "/pages/profile",
     groups: "/pages/groups",
     pages: "/pages/pages",
