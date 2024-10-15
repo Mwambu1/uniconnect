@@ -21,7 +21,7 @@ export default function Layout({
         fetchPosts();
     }, []);
     return(
-        <div className="relative z-0">
+        <div className="relative z-0 bg-gray-200">
             <div className="relative z-10 pl-3 pt-3 pr-3 bg-gray-200">
                 <NavigationBar />
             </div>

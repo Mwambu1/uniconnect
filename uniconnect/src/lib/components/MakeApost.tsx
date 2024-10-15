@@ -99,7 +99,7 @@ export default function MakeApost() {
         <div className="flex justify-end items-center gap-5">
         <div className="">
           <div className="flex justify-center">
-            <BiVideo />
+            <BiVideo className="text-black" />
           </div>
           <h1 className="text-xs text-gray-400 text-center">Video</h1>
         </div>

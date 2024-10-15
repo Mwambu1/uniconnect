@@ -41,10 +41,10 @@ export default function Home() {
       
       <div className="relative m-5 border-t-black flex flex-col text-gray-700 bg-transparent shadow-xl p-5 rounded-xl bg-clip-border">
         <h4 className="block font-sans text-center text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-          Sign Up
+          Login
         </h4>
         <p className="block text-center mt-1 font-sans text-xs antialiased font-normal leading-relaxed text-gray-700">
-          Nice to meet you! Enter your details to register.
+          Nice to meet you! Enter your credentials to login.
         </p>
         <form className="xl:max-w-screen-lg mt-2 mb-2 sm:w-96" onSubmit={(e) => e.preventDefault()}>
           <div className="flex flex-col gap-3 mb-1">
@@ -79,13 +79,13 @@ export default function Home() {
             className="mt-3 block w-full select-none rounded-lg bg-gray-900 py-3 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
           >
-            Sign Up
+            Login
           </button>
           
           <p className="block mt-4 font-sans text-xs antialiased font-normal leading-relaxed text-center text-gray-700">
-            Already have an account?
+            Dont have an account?
             <a href={appRoutes.createAccount} className="font-medium text-gray-900">
-              Sign In
+              Sign Up
             </a>
           </p>
         </form>

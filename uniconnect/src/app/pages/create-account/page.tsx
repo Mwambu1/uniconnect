@@ -54,17 +54,17 @@ export default function CreateUserPage() {
   };
 
   return (
-    <div className="container mx-auto p-5 m-5">
-      <h1 className="text-3xl font-bold mb-6">Create New User</h1>
+    <div className=" bg-white p-5 m-3 rounded-lg">
+      <h1 className="text-xl font-bold mb-6 text-center text-gray-500">Create New User</h1>
       
       <form onSubmit={submit} className="grid grid-cols-1 gap-6">
         <div>
-          <label>First Name</label>
+          <label className="text-sm">First Name</label>
           <input 
             type="text" 
             value={firstName} 
             onChange={(e) => setFirstName(e.target.value)} 
-            className="border rounded w-full py-2 px-3" 
+            className="border rounded-md w-full py-2 px-3 h-10" 
             required
           />
         </div>
@@ -75,7 +75,7 @@ export default function CreateUserPage() {
             type="text" 
             value={lastName} 
             onChange={(e) => setLastName(e.target.value)} 
-            className="border rounded w-full py-2 px-3" 
+            className="border rounded-md h-10 w-full py-2 px-3" 
             required
           />
         </div>
@@ -86,7 +86,7 @@ export default function CreateUserPage() {
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
-            className="border rounded w-full py-2 px-3" 
+            className="border rounded-md w-full py-2 px-3" 
             required
           />
         </div>

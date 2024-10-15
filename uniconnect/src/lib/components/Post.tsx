@@ -51,14 +51,19 @@ export default function Post({ data }: { data: any }) {
                 </div>
             )}
             <div className="flex justify-between gap-10 pt-5 px-2 pb-5">
-                <div className="relative flex p-2 h-fit">
-                    {likes !==0?  <IoMdThumbsUp  className="text-blue-500 absolute left-0 top-0" />:""}
-                    {loves !==0 ? <HiHeart className="text-red-500 absolute left-2 top-0"/>: ""}
-                    {celebrations !==0 ? <MdCelebration className="text-green-500 absolute left-4  top-0"/>: ""}
-                    {laughs !==0 ? <RiEmotionLaughFill className="text-yellow-500 absolute left-6 bg-white rounded-full top-0"/>: ""}    
+                <div className="">
+                    <div className="relative flex p-2 h-fit">
+                        {likes !==0?  <IoMdThumbsUp  className="text-blue-500 h-8 w-8 absolute left-0 top-0 p-1 bg-white rounded-full" />:""}
+                        {loves !==0 ? <HiHeart className="text-red-500 absolute h-8 w-8 left-5 top-0 p-1 bg-white rounded-full"/>: ""}
+                        {celebrations !==0 ? <MdCelebration className="text-green-500 h-8 w-8 absolute left-10 p-1 bg-white rounded-full top-0"/>: ""}
+                        {laughs !==0 ? <RiEmotionLaughFill className="text-yellow-500 h-8 w-8 absolute left-14 p-1 bg-white rounded-full top-0"/>: ""}    
+                    </div>
+                   <div className="mt-3 flex justify-center">
+                  {likes + loves + laughs + celebrations !== 0?  <h1 className="text-xs text-gray-500 w-full text-center">{likes + laughs + loves + celebrations} Reactions</h1>:"" }
+                   </div>
                 </div>
                 <div className="flex gap-5">
-                <div className="grid justify-center items-center">
+                <div className="grid justify-center items-center h-fit">
                     <div onClick={() => setShowReactions(!showReactions)} className="flex justify-center items-center">
                        { !showReactions?
                         <div className="flex">
@@ -90,13 +95,13 @@ export default function Post({ data }: { data: any }) {
                 </div>
                 <div className="">
                     <div className="flex justify-center items-center">
-                        <BiComment/>
+                        <BiComment className="text-black"/>
                     </div>
                     <h1 className="text-xs text-gray-500">{data.comment_count} Comments</h1>
                 </div>
                 <div>
                     <div className="flex justify-center items-center">
-                        <BiShare/>
+                        <BiShare className="text-black"/>
                     </div>
                     <h1 className="text-xs text-gray-500">2 Shares</h1>
                 </div>
