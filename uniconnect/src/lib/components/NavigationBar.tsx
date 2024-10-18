@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 import { GrAnnounce } from "react-icons/gr";
 import { IoIosNotifications } from "react-icons/io";
-import { MdMessage } from "react-icons/md";
+import { MdGroups3, MdMessage } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 import { appRoutes } from "../routes";
 import { useRouter } from "next/navigation";
@@ -67,6 +67,12 @@ export default function NavigationBar() {
                     <div onClick={()=> toggleMessages()} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
                             <MdMessage className="text-blue-400 text-md"/>
+                        </div>
+                        <h1 className="hidden xl:visible text-xs text-gray-400">Messages</h1>
+                    </div>
+                    <div  onClick={() => router.push(appRoutes.groups)} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
+                        <div className="flex justify-center items-center">
+                            <MdGroups3 className="text-blue-400 text-md"/>
                         </div>
                         <h1 className="hidden xl:visible text-xs text-gray-400">Messages</h1>
                     </div>
