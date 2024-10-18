@@ -1,29 +1,41 @@
 "use client";
 import { signIn } from "@/lib/firebase/auth/userAuth";
+import { User } from "@/lib/model/types";
+import { setUser } from "@/lib/redux/slices/user/userSlice";
 import { appRoutes } from "@/lib/routes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function Home() {
   // State for email and password
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  
+
   const router = useRouter();
+  const dispatch = useDispatch(); // Initialize dispatch
 
   // Submit function to handle sign-in
   const submit = async () => {
     const userData = { email, password };
   
     try {
-      const res = await signIn(userData);  // Wait for the result of signIn
-      if (res === 'success') {
-        router.push(appRoutes.feed);  // Navigate if login is successful
-      } else {
-        console.error("Login failed");
-        // Handle failed login case here (e.g., show an error message)
-      }
+      const signedInUser = await signIn(userData);  // Wait for the result of signIn
+      console.log(signedInUser)
+        if (signedInUser !== null && signedInUser.exists()) {
+          // Extract the user data from the Firestore document
+          const userData = signedInUser.data();
+          
+          // Dispatch the setUser action with the user data
+          dispatch(setUser(userData));
+          
+          // Navigate if login is successful
+          router.push(appRoutes.feed);
+        } else {
+          console.error("Login failed");
+          // Handle failed login case here (e.g., show an error message)
+        }
     } catch (error) {
       console.error("An error occurred during sign-in", error);
       // Handle errors that occurred during sign-in process

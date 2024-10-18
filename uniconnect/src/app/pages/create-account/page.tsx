@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createNewUser } from "@/lib/firebase/auth/userAuth"; // Adjust the import path as per your project structure
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/model/types";
+import { appRoutes } from "@/lib/routes";
 
 export default function CreateUserPage() {
   const router = useRouter();
@@ -47,7 +48,7 @@ export default function CreateUserPage() {
 
     try {
       await createNewUser(userData);  // Call the function to create a new user
-      router.push("/user-dashboard");  // Redirect to dashboard or another page on success
+      router.push(appRoutes.feed);  // Redirect to dashboard or another page on success
     } catch (error) {
       console.error("Error creating user:", error);
     }
