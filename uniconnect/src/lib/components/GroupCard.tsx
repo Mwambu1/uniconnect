@@ -1,8 +1,12 @@
+"use client"
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { FaBasketball } from "react-icons/fa6";
+import { appRoutes } from "../routes";
 
 export default function GroupCard() {
+  const router = useRouter();
   return (
     <div className="flex flex-col bg-white p-5 rounded-lg">
       <div className="flex justify-between">
@@ -17,7 +21,7 @@ export default function GroupCard() {
           </div>
           <div className="px-2 w-full">
             <div className="pt-1">
-              <h1 className="font-extrabold text-lg text-blue-500">
+              <h1 className="font-extrabold text-lg text-blue-500 cursor-pointer" onClick={()=> router.push(appRoutes.groupDetails)}>
                 GI UNZA ROYAL ACADEMY
               </h1>
             </div>

@@ -8,4 +8,5 @@ export const appRoutes = {
     settings: "/pages/settings",
     help: "/pages/help-and-support",
     feedback: "/pages/feedback",
+    groupDetails: "/pages/group-details",
 }
