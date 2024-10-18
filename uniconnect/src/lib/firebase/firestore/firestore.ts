@@ -2,7 +2,9 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getDocs,
+  limit,
   onSnapshot,
   orderBy,
   query,
@@ -13,9 +15,10 @@ import {
 import { db, storage } from "../config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"; 
 import { setPosts } from "@/lib/redux/slices/posts/postsSlice";
 import { store } from "@/lib/redux/store";
-import { Post } from "@/lib/model/types";
+import { Group, Post } from "@/lib/model/types";
 
 export async function testFunction() {
   await addDoc(collection(db, "test"), {
@@ -110,5 +113,53 @@ export async function fetchPosts() {
   } catch (error) {
     console.error("Error fetching posts:", error);
     throw new Error("Failed to fetch posts");
+  }
+}
+
+// Function to create a new group
+export async function createGroup(groupData: Omit<Group, "groupId">): Promise<string> {
+  try {
+    // Generate a unique groupId
+    const groupId = uuidv4(); // This will be both the document ID and a field inside the document
+
+    // Create a reference to the 'groups' collection in Firestore
+    const groupRef = doc(collection(db, "groups"), groupId); // The document ID is the groupId
+
+    // Add groupId to the group object
+    const group: Group = { ...groupData, groupId }; // Combine passed groupData with generated groupId
+
+    // Store the group object in Firestore
+    await setDoc(groupRef, group);
+
+    return groupId; // Return the generated groupId
+  } catch (error) {
+    console.error("Error creating group:", error);
+    throw new Error("Failed to create group");
+  }
+}
+
+// Function to retrieve the first 10 groups
+export async function getFirstTenGroups(): Promise<Group[]> {
+  const groupsRef = collection(db, "groups"); // Firestore collection 'groups'
+  const q = query(groupsRef, limit(10)); // Limit to 10 groups
+
+  const querySnapshot = await getDocs(q);
+  const groups: Group[] = [];
+  querySnapshot.forEach((doc) => {
+    groups.push(doc.data() as Group); // Add each group to the array
+  });
+  
+  return groups;
+}
+
+// Function to retrieve a single group by ID
+export async function getGroupById(groupId: string) {
+  const groupRef = doc(db, "groups", groupId);
+  const groupDoc = await getDoc(groupRef);
+
+  if (groupDoc.exists()) {
+    return groupDoc.data();
+  } else {
+    throw new Error("Group not found");
   }
 }

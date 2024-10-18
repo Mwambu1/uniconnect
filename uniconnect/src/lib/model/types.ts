@@ -36,3 +36,13 @@ export interface Post {
   comments_by: string[];
   liked_by: string[];
 }
+
+export interface Group {
+  groupId: string,
+  groupName: string;
+  groupDescription: string;
+  members: string[],
+  groupProfile: string,
+  posts: string[],
+  groupAdmin: string,
+}
