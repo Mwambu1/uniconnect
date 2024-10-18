@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../redux/store";
 import { getPosts } from "../redux/slices/posts/postsSlice";
 import { selectPosts } from "../redux/slices/posts/selector";
+import { GiEmptyMetalBucket } from "react-icons/gi";
+import { Post as PostType } from "../model/types"
 
-interface PostType {
-  post_id: string;
-  // Add other properties of the post if needed
+interface postType {
+  posts: PostType
 }
 
 const TimeLine: React.FC = () => {
@@ -50,9 +51,9 @@ const TimeLine: React.FC = () => {
   return (
     <div className="flex flex-col gap-2 bg-gray-200 rounded-lg">
       {posts.length === 0 ? (
-        <p>No posts available.</p>
+        <p className="text-center p-10 bg-white rounded-lg">No posts available.</p>
       ) : (
-        posts.map((post: PostType) => <Post key={post.post_id} data={post} />)
+        posts.map((post: PostType) => <Post key={post.user_id} data={post} />)
       )}
     </div>
   );

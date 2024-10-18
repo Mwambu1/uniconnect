@@ -60,7 +60,7 @@ export default function CreateUserPage() {
       
       <form onSubmit={submit} className="grid grid-cols-1 gap-6">
         <div>
-          <label className="text-sm">First Name</label>
+          <label className="text-sm text-black">First Name</label>
           <input 
             type="text" 
             value={firstName} 
@@ -71,7 +71,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Last Name</label>
+          <label className="text-sm text-black">Last Name</label>
           <input 
             type="text" 
             value={lastName} 
@@ -82,7 +82,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Email</label>
+          <label className="text-sm text-black">Email</label>
           <input 
             type="email" 
             value={email} 
@@ -93,7 +93,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Password</label>
+          <label className="text-sm text-black">Password</label>
           <input 
             type="password" 
             value={password} 
@@ -104,7 +104,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Program</label>
+          <label className="text-sm text-black">Program</label>
           <input 
             type="text" 
             value={program} 
@@ -115,7 +115,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Year of Study</label>
+          <label className="text-sm text-black">Year of Study</label>
           <input 
             type="number" 
             value={yearOfStudy} 
@@ -126,7 +126,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Student Number</label>
+          <label className="text-sm text-black">Student Number</label>
           <input 
             type="number" 
             value={studentNumber} 
@@ -137,7 +137,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Bio</label>
+          <label className="text-sm text-black">Bio</label>
           <textarea 
             value={bio} 
             onChange={(e) => setBio(e.target.value)} 
@@ -146,7 +146,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Profile Picture URL</label>
+          <label className="text-sm text-black">Profile Picture URL</label>
           <input 
             type="text" 
             value={profilePictureUrl} 
@@ -156,7 +156,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>Background Profile URL</label>
+          <label className="text-sm text-black">Background Profile URL</label>
           <input 
             type="text" 
             value={backgroundProfile} 
@@ -166,7 +166,7 @@ export default function CreateUserPage() {
         </div>
 
         <div>
-          <label>School</label>
+          <label className="text-sm text-black">School</label>
           <input 
             type="text" 
             value={school} 
@@ -176,7 +176,7 @@ export default function CreateUserPage() {
           />
         </div>
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
           Create User
         </button>
       </form>
