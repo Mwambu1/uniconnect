@@ -1,9 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { appRoutes } from "../routes";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/slices/user/selectors";
+import { checkIfUserIsMember, addUserToGroup } from "../firebase/firestore/firestore"; // Firestore functions
 
 interface GroupCardProps {
   groupName: string;
@@ -21,6 +25,43 @@ export default function GroupCard({
   groupId, // Include groupId in props
 }: GroupCardProps) {
   const router = useRouter();
+  const sliceUser = useSelector(selectUser); // Get the current signed-in user
+  const [isMember, setIsMember] = useState(false); // State to track if the user is a member
+  const [loading, setLoading] = useState(true); // Track loading state
+
+  // Check if the current user is a member of the group
+  useEffect(() => {
+    const checkMembership = async () => {
+      if (sliceUser && groupId) {
+        const userId = sliceUser.userId;
+        const membershipStatus = await checkIfUserIsMember(groupId, userId);
+        setIsMember(membershipStatus); // Set membership status
+        setLoading(false); // Stop loading once check is complete
+      }
+    };
+    checkMembership();
+  }, [sliceUser, groupId]);
+
+  // Handle joining the group
+  const handleJoinGroup = async () => {
+    if (!sliceUser) {
+      console.error("No user is signed in.");
+      return;
+    }
+
+    const userId = sliceUser.userId;
+    const userName = `${sliceUser.firstName} ${sliceUser.lastName}`;
+
+    try {
+      const result = await addUserToGroup(groupId, userId);
+      if (result === "success") {
+        setIsMember(true); // Update the UI to reflect that the user has joined the group
+        console.log(`User ${userName} successfully joined the group!`);
+      }
+    } catch (error) {
+      console.error("Error joining the group:", error);
+    }
+  };
 
   // When clicking on group name, navigate to the group details page
   const handleGroupClick = () => {
@@ -59,9 +100,20 @@ export default function GroupCard({
       <div className="flex mt-3">
         <h1 className="text-sm">{groupDescription}</h1>
       </div>
-      <button className="bg-blue-400 rounded-md h-8 mt-3">
-        <h1 className="text-white">Join Group</h1>
-      </button>
+      
+      {loading ? (
+        <button className="bg-gray-400 rounded-md h-8 mt-3" disabled>
+          <h1 className="text-white">Checking membership...</h1>
+        </button>
+      ) : isMember ? (
+        <button className="bg-green-400 rounded-md h-8 mt-3" disabled>
+          <h1 className="text-white">Already a member</h1>
+        </button>
+      ) : (
+        <button className="bg-blue-400 rounded-md h-8 mt-3" onClick={handleJoinGroup}>
+          <h1 className="text-white">Join Group</h1>
+        </button>
+      )}
     </div>
   );
 }

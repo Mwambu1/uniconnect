@@ -218,3 +218,61 @@ export async function getGroupById(groupId: string) {
     throw new Error("Group not found");
   }
 }
+
+// Function to add a user to a group's member list
+export const addUserToGroup = async (groupId: string, userId: string): Promise<string> => {
+  const groupRef = doc(db, "groups", groupId);
+  const groupDoc = await getDoc(groupRef);
+
+  if (groupDoc.exists()) {
+    const groupData = groupDoc.data();
+    const members: string[] = groupData?.members || [];
+
+    // Check if the user is already a member
+    if (members.includes(userId)) {
+      return "already_member";
+    }
+
+    // Add the user to the group members list
+    const updatedMembers = [...members, userId];
+    await updateDoc(groupRef, {
+      members: updatedMembers,
+    });
+
+    return "success";
+  } else {
+    console.error("Group not found");
+    return "group_not_found";
+  }
+};
+
+// Function to check if the user is a member of a group
+export const checkIfUserIsMember = async (groupId: string, userId: string): Promise<boolean> => {
+  const groupRef = doc(db, "groups", groupId);
+  const groupDoc = await getDoc(groupRef);
+
+  if (groupDoc.exists()) {
+    const groupData = groupDoc.data();
+    const members: string[] = groupData?.members || [];
+
+    // Check if the user is already a member
+    return members.includes(userId);
+  } else {
+    console.error("Group not found");
+    return false;
+  }
+};
+
+// Fetch posts for a specific group
+export async function getGroupPosts(groupId: string) {
+  const postsRef = collection(db, `group-posts`);
+  const postsQuery = query(postsRef);
+  const querySnapshot = await getDocs(postsQuery);
+  
+  const posts = querySnapshot.docs.map(doc => ({
+    post_id: doc.id,
+    ...doc.data(),
+  }));
+  
+  return posts;
+}
