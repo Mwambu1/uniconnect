@@ -1,30 +1,27 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation"; // To get groupId from URL
 import Image from "next/image";
 import { getGroupById } from "@/lib/firebase/firestore/firestore";
-
+import MakeAGroupPost from "@/lib/components/MakeAGroupPost";
 
 export default function GroupDetails() {
-  const { groupId } = useParams(); // Get groupId from the route parameters
+  const { id } = useParams(); // Get groupId from the route parameters
   const [group, setGroup] = useState<any>(null); // Store group data
 
   // Fetch group data when component loads
   useEffect(() => {
     const fetchGroup = async () => {
-      if (groupId) {
-        const groupData = await getGroupById(groupId[0]); // Firestore query to get the group
+      if (id) {
+        console.log("*****Group ID*****");
+        console.log(id);
+        const groupData = await getGroupById(id as string); // Firestore query to get the group
         setGroup(groupData); // Store the group data
       }
     };
 
     fetchGroup();
-  }, [groupId]);
-
-  if (!group) {
-    return <p>Loading group details...</p>; // Show a loading state while fetching group data
-  }
+  }, [id]);
 
   return (
     <div className="flex flex-col gap-3 p-3 bg-gray-200 shadow-xl w-full min-h-screen">
@@ -34,19 +31,21 @@ export default function GroupDetails() {
             <div className="flex justify-between">
               <div className="w-full">
                 <div className="flex justify-center relative w-full h-72">
-                  <Image
-                    src={group.groupProfile || "/unza_logo.png"} // Display group profile image
-                    alt="Group logo"
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-md"
-                  />
+                  {group && (
+                    <Image
+                      src={group.groupProfile || "/unza_logo.png"} // Display group profile image
+                      alt="Group logo"
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-md"
+                    />
+                  )}
                 </div>
                 <div className="p-3">
                   <h1 className="font-extrabold text-lg text-blue-400">
-                    {group.groupName}
+                    {group?.groupName}
                   </h1>
-                  <h1 className="text-sm text-black">{group.groupDescription}</h1>
+                  <h1 className="text-sm text-black">{group?.groupDescription}</h1>
                 </div>
               </div>
             </div>
@@ -57,7 +56,9 @@ export default function GroupDetails() {
             </div>
           </div>
         </div>
-        {/* Add other sections like Photos, Videos, Posts, etc. here */}
+        <div>
+          <MakeAGroupPost/>
+        </div>
       </div>
     </div>
   );

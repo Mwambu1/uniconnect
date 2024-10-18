@@ -18,7 +18,7 @@ import { v4 } from "uuid";
 import { v4 as uuidv4 } from "uuid"; 
 import { setPosts } from "@/lib/redux/slices/posts/postsSlice";
 import { store } from "@/lib/redux/store";
-import { Group, Post } from "@/lib/model/types";
+import { Group, GroupPost, Post } from "@/lib/model/types";
 
 export async function testFunction() {
   await addDoc(collection(db, "test"), {
@@ -69,6 +69,61 @@ export async function createApost(
 
     // Add document and get reference
     const docRef = await addDoc(collection(db, "posts"), postData);
+
+    // Update the document with the correct post_id
+    await updateDoc(docRef, { post_id: docRef.id });
+
+    console.log("Post created successfully with ID:", docRef.id);
+    return "success";
+  } catch (error) {
+    console.error("Error creating post:", error);
+    return "failed";
+  }
+}
+
+// Function to handle posting
+export async function createAGroupPost(
+  postContent: string,
+  imageUpload: File | null,
+  userId: string,
+  username: string,
+  groupId: string
+) {
+  if (postContent.trim() === "" && imageUpload === null) {
+    alert("Please write something before posting.");
+    return "failed";
+  }
+
+  try {
+    // Prepare media URL
+    let mediaUrl: string[] = [];
+    if (imageUpload) {
+      const imageRef = ref(storage, `images/${imageUpload.name}_${v4()}`);
+      await uploadBytes(imageRef, imageUpload);
+      const url = await getDownloadURL(imageRef);
+      mediaUrl = [url];
+    }
+
+    // Prepare post data
+    const postData: GroupPost = {
+      post_id: "",
+      groupId: groupId,
+      user_id: userId, // Use the actual user ID passed as an argument
+      username: username, // Use the actual username passed as an argument
+      content: postContent,
+      media_url: mediaUrl,
+      created_at: Timestamp.now(), // Use Firestore Timestamp
+      like_count: 0,
+      love_count: 0,
+      laugh_count: 0,
+      celebrations_count: 0,
+      comment_count: 0,
+      comments_by: [],
+      liked_by: [],
+    };
+
+    // Add document and get reference
+    const docRef = await addDoc(collection(db, "group-posts"), postData);
 
     // Update the document with the correct post_id
     await updateDoc(docRef, { post_id: docRef.id });
