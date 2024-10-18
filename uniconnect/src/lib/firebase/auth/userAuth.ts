@@ -1,10 +1,11 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth, db } from "../config";
 import { User } from "@/lib/model/types";
-import { addDoc, collection, doc, DocumentSnapshot, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, DocumentData, DocumentSnapshot, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { setUser } from "@/lib/redux/slices/user/userSlice";
 import { useSelector } from "react-redux";
 import { selectUser } from '../../redux/slices/user/selectors';
+import { store } from "@/lib/redux/store";
 
 export async function createNewUser(userInfo: User) {
   try {
@@ -48,14 +49,16 @@ export async function signIn(userInfo: SignInProps): Promise<DocumentSnapshot | 
   try {
     console.log(userInfo)
     // Await the promise returned by signInWithEmailAndPassword
-    const cred = await signInWithEmailAndPassword(auth, userInfo.email, userInfo.password);
+    const cred = await signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
     console.log(cred)
+    localStorage.setItem("user", JSON.stringify(cred.user.uid));
     const userRef = doc(db,'user', cred.user.uid);
     const signedInUser = await getDoc(userRef)
     console.log("***current user******")
     console.log(signedInUser)
     
     // Return "success" if login is successful
+    store.dispatch(setUser(signedInUser));
     return signedInUser;
     
   } catch (error) {
@@ -65,4 +68,14 @@ export async function signIn(userInfo: SignInProps): Promise<DocumentSnapshot | 
     // Return an error message (or throw if you want to handle elsewhere)
     return null;
   }
+}
+
+export async function signOutUser() {
+    signOut(auth);
+}
+
+export async function getSignedUser(userId: string): Promise<DocumentData | undefined> {
+    const userRef = doc(db,'user', userId);
+    const signedInUser = await getDoc(userRef)
+    return signedInUser;
 }

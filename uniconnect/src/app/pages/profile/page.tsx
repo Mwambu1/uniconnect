@@ -14,6 +14,7 @@ import { FcFeedback } from "react-icons/fc";
 import { HiPhoto } from "react-icons/hi2";
 import { MdGroups, MdPages, MdPersonAddAlt1 } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
+import { signOutUser } from "@/lib/firebase/auth/userAuth";
 
 export default function Profile() {
   const router = useRouter();
@@ -23,6 +24,8 @@ export default function Profile() {
   // Use useEffect to set signedUser only when sliceUser changes
   useEffect(() => {
     if (sliceUser) {
+      console.log("******Profile Page Slice******")
+      console.log(sliceUser)
       setSignedUser(sliceUser);
     }
   }, [sliceUser]); // Dependency array ensures this only runs when sliceUser changes
@@ -132,7 +135,7 @@ export default function Profile() {
               <FcFeedback className="text-black" />
               <h1 className="text-black">Give feedback</h1>
             </div>
-            <div onClick={() => appRoutes.home} className="flex items-center gap-3 cursor-pointer">
+            <div onClick={() => signOutUser()} className="flex items-center gap-3 cursor-pointer">
               <BiLogOut className="text-red-500" />
               <h1 className="text-black">Logout</h1>
             </div>

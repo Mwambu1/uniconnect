@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { BiComment, BiDotsVerticalRounded, BiShare } from "react-icons/bi";
+import { BiCheckCircle, BiComment, BiDotsVerticalRounded, BiShare } from "react-icons/bi";
 import { HiHeart } from "react-icons/hi";
 import { IoMdThumbsUp } from "react-icons/io";
 import { MdCelebration } from "react-icons/md";
@@ -135,39 +135,24 @@ export default function Post({ data }: { data: PostType }) {
         </div>
       )}
       <div className="flex justify-between gap-10 pt-5 px-2 pb-5">
-        <div>
-          <div className="relative flex p-2 h-fit">
+        <div className="relative">
+          <div className="relative flex p-2 h-10">
             {data.like_count !== 0 &&  (
-              <IoMdThumbsUp className="text-blue-500 h-8 w-8 absolute left-0 top-0 p-1 bg-white rounded-full" />
+              <IoMdThumbsUp className="text-blue-500 h-8 w-8  p-1 bg-white rounded-full" />
             )}
             {data.love_count !== 0 && (
-              <HiHeart className="text-red-500 absolute h-8 w-8 left-5 top-0 p-1 bg-white rounded-full" />
+              <HiHeart className="text-red-500  h-6 w-6  bg-white rounded-full" />
             )}
             {data.celebrations_count !== 0 && (
-              <MdCelebration className="text-green-500 h-8 w-8 absolute left-10 p-1 bg-white rounded-full top-0" />
+              <MdCelebration className="text-green-500 h-8 w-8 p-1 bg-white rounded-full" />
             )}
             {data.laugh_count !== 0 && (
-              <RiEmotionLaughFill className="text-yellow-500 h-8 w-8 absolute left-14 p-1 bg-white rounded-full top-0" />
-            )}
-          </div>
-          <div className="mt-3 flex justify-center">
-            {data.like_count +
-              data.love_count +
-              data.laugh_count +
-              data.celebrations_count !==
-              0 && (
-              <h1 className="text-xs text-gray-500 w-full text-center">
-                {data.like_count +
-                  data.love_count +
-                  data.laugh_count +
-                  data.celebrations_count}{" "}
-                Reactions
-              </h1>
+              <RiEmotionLaughFill className="text-yellow-500 h-8 w-8 p-1 bg-white rounded-full" />
             )}
           </div>
         </div>
-        <div className="flex gap-5">
-          <div className="grid justify-center items-center h-fit">
+        <div className="relative flex gap-5">
+          <div className="grid justify-center items-center h-10">
             <div
               onClick={() => setShowReactions(!showReactions)}
               className="flex justify-center items-center"
@@ -175,7 +160,7 @@ export default function Post({ data }: { data: PostType }) {
               {!showReactions ? (
                 <div className="flex">
                   {liked ? (
-                    <IoMdThumbsUp className="text-blue-500" />
+                    <BiCheckCircle className="text-blue-500" />
                   ) : (
                     <IoMdThumbsUp className="text-black" />
                   )}
@@ -183,7 +168,7 @@ export default function Post({ data }: { data: PostType }) {
               ) : (
                 <div
                   onClick={() => setShowReactions(!showReactions)}
-                  className={`relative z-0 flex justify-between gap-x-2 shadow-xl rounded-full p-2 ${
+                  className={`absolute z-0 flex -top-10 -left-40 w-fit justify-between bg-white gap-x-2 shadow-xl rounded-full p-2 ${
                     showReactions ? "visible" : "hidden"
                   }`}
                 >
@@ -210,7 +195,7 @@ export default function Post({ data }: { data: PostType }) {
               Reactions
             </h1>
           </div>
-          <div>
+          <div className="mt-1">
             <div className="flex justify-center items-center">
               <BiComment className="text-black" />
             </div>
@@ -218,12 +203,6 @@ export default function Post({ data }: { data: PostType }) {
               {data.comment_count} Comments
             </h1>    
           </div>
-          {/* <div>
-            <div className="flex justify-center items-center">
-              <BiShare className="text-black" />
-            </div>
-            <h1 className="text-xs text-gray-500">2 Shares</h1>
-          </div> */}
         </div>
       </div>
     </div>
