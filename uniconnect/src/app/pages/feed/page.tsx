@@ -16,7 +16,7 @@ export default function Feed() {
                 <div className="hidden xl:visible">
                 <LeftSideBar />
                 </div>
-                <div className="flex flex-col gap-3 xl:w-[60%]">
+                <div className="flex flex-col gap-3 w-full xl:w-[60%]">
                     <MakeApost/>
                     <TimeLine/>
                 </div>

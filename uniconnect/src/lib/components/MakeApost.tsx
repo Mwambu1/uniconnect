@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiVideo } from "react-icons/bi";
 import { FaSmile } from "react-icons/fa";
 import { FaLocationPin } from "react-icons/fa6";
@@ -9,6 +9,9 @@ import { createApost } from "../firebase/firestore/firestore"; // Assuming you w
 import Image from "next/image";
 import { Bars, ThreeDots } from 'react-loading-icons'
 import Circles from "react-loading-icons/dist/esm/components/circles";
+import { User } from "../model/types";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/slices/user/selectors";
 
 export default function MakeApost() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -17,11 +20,33 @@ export default function MakeApost() {
   const [selectedImage, setSelectedImage] = useState<string | ArrayBuffer | null>(null);
   const [uploading, setUploading] = useState(true);
   const [uploadStatus, setUploadStatus] = useState("");
+  const [signedInUser, setSignedInUser] = useState<User>()
+  const sliceUser = useSelector(selectUser);
+
+  useEffect(() => {
+    console.log("Slice User:", sliceUser);
+    if (sliceUser) {
+      setSignedInUser(sliceUser);
+    }
+  }, [sliceUser]);
 
   const handlePost = async () => {
     setUploading(false);
     if (!imageUpload) return; // Ensure there's an image to upload
-    const res = await createApost(postContent, imageUpload);
+    if (!signedInUser) {
+      console.error("User is not signed in");
+      return;
+    }
+  
+    const userId = signedInUser.userId;
+    const username = `${signedInUser.firstName} ${signedInUser.lastName}`;
+  
+    console.log("Post Content:", postContent);
+    console.log("Image Upload:", imageUpload);
+    console.log("User ID:", userId);
+    console.log("Username:", username);
+  
+    const res = await createApost(postContent, imageUpload, userId, username);
     if (res === "success") {
       setPostContent("");
       setUploadStatus(res);
