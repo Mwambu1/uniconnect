@@ -216,7 +216,7 @@ export default function Post({ data }: { data: PostType }) {
             </div>
             <h1 className="text-xs text-gray-500">
               {data.comment_count} Comments
-            </h1>
+            </h1>    
           </div>
           {/* <div>
             <div className="flex justify-center items-center">
