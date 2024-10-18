@@ -49,8 +49,8 @@ export default function GroupCard({
               </h1>
             </div>
             <div className="flex justify-between w-full">
-              <h1 className="text-md">{groupDescription}</h1>
-              <h1 className="text-md">{membersCount} Members</h1>
+              <h1 className="text-md text-black">{groupDescription}</h1>
+              <h1 className="text-md text-black">{membersCount} Members</h1>
             </div>
           </div>
         </div>
