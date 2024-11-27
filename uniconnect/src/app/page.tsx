@@ -43,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <main className="grid grid-cols-1 xl:flex max-h-screen items-center bg-white justify-between xl:p-24">
+    <main className="grid grid-cols-1 xl:flex max-h-screen items-center bg-white justify-between lg:p-24">
       <div className="flex flex-col gap-3 p-10">
         <div className="flex justify-center">
           <Image className="flex justify-center bg-transparent" src="/unza_logo.png" alt="unza logo" width={200} height={400}></Image>

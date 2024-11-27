@@ -50,31 +50,31 @@ export default function NavigationBar() {
                         <div className="flex justify-center items-center">
                             <IoHomeSharp className="text-blue-400 text-sm"/>
                         </div>
-                        <h1 className="hidden xl:visible text-xs text-gray-400">Home</h1>
+                        <h1 className="hidden lg:block text-xs text-gray-400">Home</h1>
                     </div>
                    <div onClick={()=> toggleNotification()} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
                             <IoIosNotifications className="text-blue-400 text-md"/>
                         </div>
-                        <h1 className="hidden xl:visible text-xs text-gray-400">Notifications</h1>
+                        <h1 className="hidden lg:block text-xs text-gray-400">Notifications</h1>
                     </div>
                     <div className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
                             <GrAnnounce className="text-blue-400 text-md"/>
                         </div>
-                        <h1 className="hidden xl:visible text-xs text-gray-400">Announcements</h1>
+                        <h1 className="hidden lg:block text-xs text-gray-400">Announcements</h1>
                     </div>
                     <div onClick={()=> toggleMessages()} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
                             <MdMessage className="text-blue-400 text-md"/>
                         </div>
-                        <h1 className="hidden xl:visible text-xs text-gray-400">Messages</h1>
+                        <h1 className="hidden lg:block text-xs text-gray-400">Messages</h1>
                     </div>
                     <div  onClick={() => router.push(appRoutes.groups)} className="xl:px-5 hover:bg-blue-100 p-1 rounded-lg">
                         <div className="flex justify-center items-center">
                             <MdGroups3 className="text-blue-400 text-md"/>
                         </div>
-                        <h1 className="hidden xl:visible text-xs text-gray-400">Messages</h1>
+                        <h1 className="hidden lg:block text-xs text-gray-400">Groups</h1>
                     </div>
             </div>
             <div className="flex justify-center items-center">

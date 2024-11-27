@@ -9,13 +9,17 @@ export default function Pages() {
     return(
         <div className="flex flex-col gap-3 p-3 bg-gray-200 shadow-xl min-h-screen">
             <div className="relative flex justify-between gap-10">
+                <div className="w-[20%]">
                 <LeftSideBar/>
+                </div>
                 <div className="flex flex-col gap-3 w-[60%]">
                     <SearchForPages/>
                     <PageCard/>
                     <PageCard/>
                 </div>
+                <div className="w-20%">
                 <RightSideBar/>
+                </div>
             </div>
         </div>
     )

@@ -71,7 +71,8 @@ export default function Layout({
       >
         <MessagesList />
       </div>
-      <div className={inter.className}>{children}</div>
+      <div className={inter.className}>
+        {children}</div>
     </div>
   );
 }
