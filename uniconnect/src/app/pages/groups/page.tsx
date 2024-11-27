@@ -12,17 +12,17 @@ export default function Groups() {
   return (
     <div className="flex flex-col gap-3 p-3 bg-gray-200 shadow-xl min-h-screen">
       <div className="relative flex justify-between gap-10">
-        <div className="hidden xl:visible">
+        <div className="hidden md:block">
           <LeftSideBar />
         </div>
-        <div className="flex flex-col gap-3 w-full xl:2xlw-[60%]">
+        <div className="flex flex-col gap-3 w-full md:w-[60%]">
           <SearchForGroup />
           <button onClick={()=> router.push(appRoutes.createGroup)} className="bg-blue-400 hover:h-10 rounded-md h-8 mt-3">
             <h1 className="text-white">Create Group</h1>
           </button>
           <GroupsList/>
         </div>
-        <div className="hidden xl:visible">
+        <div className="hidden md:block">
           <RightSideBar />
         </div>
       </div>

@@ -7,7 +7,10 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { appRoutes } from "../routes";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/slices/user/selectors";
-import { checkIfUserIsMember, addUserToGroup } from "../firebase/firestore/firestore"; // Firestore functions
+import {
+  checkIfUserIsMember,
+  addUserToGroup,
+} from "../firebase/firestore/firestore"; // Firestore functions
 
 interface GroupCardProps {
   groupName: string;
@@ -89,18 +92,17 @@ export default function GroupCard({
                 {groupName}
               </h1>
             </div>
-            <div className="flex justify-between w-full">
-              <h1 className="text-md text-black">{groupDescription}</h1>
-              <h1 className="text-md text-black">{membersCount} Members</h1>
-            </div>
           </div>
         </div>
         <BiDotsVerticalRounded />
       </div>
-      <div className="flex mt-3">
-        <h1 className="text-sm">{groupDescription}</h1>
+      <div className="flex justify-end w-full h-full pt-3">
+        <h1 className="text-md text-black">{membersCount} Members</h1>
       </div>
-      
+      <div className="flex justify-between w-full h-full pt-2">
+        <h1 className="text-md text-black md:text-sm">{groupDescription}</h1>
+      </div>
+
       {loading ? (
         <button className="bg-gray-400 rounded-md h-8 mt-3" disabled>
           <h1 className="text-white">Checking membership...</h1>
@@ -110,7 +112,10 @@ export default function GroupCard({
           <h1 className="text-white">Already a member</h1>
         </button>
       ) : (
-        <button className="bg-blue-400 rounded-md h-8 mt-3" onClick={handleJoinGroup}>
+        <button
+          className="bg-blue-400 rounded-md h-8 mt-3"
+          onClick={handleJoinGroup}
+        >
           <h1 className="text-white">Join Group</h1>
         </button>
       )}

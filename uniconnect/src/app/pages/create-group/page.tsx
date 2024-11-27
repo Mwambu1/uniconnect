@@ -58,7 +58,7 @@ export default function CreateGroupPage() {
   };
 
   return (
-    <div className="bg-white p-5 m-3 rounded-lg">
+    <div className="bg-white p-5 m-3 rounded-lg h-fit md:mx-20 md:mb-10 md:mt-10">
       <h1 className="text-xl font-bold mb-6 text-center text-gray-500">Create New Group</h1>
       
       <form onSubmit={submitGroup} className="grid grid-cols-1 gap-6">

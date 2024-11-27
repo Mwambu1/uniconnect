@@ -11,6 +11,7 @@ import {
   setDoc,
   Timestamp,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { db, storage } from "../config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -266,7 +267,7 @@ export const checkIfUserIsMember = async (groupId: string, userId: string): Prom
 // Fetch posts for a specific group
 export async function getGroupPosts(groupId: string) {
   const postsRef = collection(db, `group-posts`);
-  const postsQuery = query(postsRef);
+  const postsQuery = query(postsRef, where("groupId","==",groupId));
   const querySnapshot = await getDocs(postsQuery);
   
   const posts = querySnapshot.docs.map(doc => ({

@@ -11,7 +11,7 @@ export default function LeftSideBar() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col gap-3 bg-white rounded-lg p-5 max-h-screen w-[20%]">
+    <div className="flex flex-col gap-3 bg-white rounded-lg p-5 max-h-screen w-[20%] md:w-full">
       <div className="flex gap-3 w-full">
         <RxAvatar className="text-gray-400 h-10 w-10" />
         <h1 className="text-sm text-gray-400 font-semibold">Mwambu Kaumba</h1>

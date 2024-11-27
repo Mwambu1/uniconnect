@@ -3,7 +3,7 @@ import { MdAddBox } from "react-icons/md";
 
 export default function RightSideBar() {
     return(
-        <div className="flex flex-col gap-3 bg-white rounded-lg p-5 min-h-screen h-fit w-[20%]">
+        <div className="flex flex-col gap-3 bg-white rounded-lg p-5 min-h-screen h-fit w-[20%] md:w-full">
             <div className="shadow-xl rounded-lg p-5 w-full">
                 <h1>Upcoming events</h1>
                 <Image src="/unza_logo.png" alt="unza logo" width={200} height={200} className="rounded-lg"/>
