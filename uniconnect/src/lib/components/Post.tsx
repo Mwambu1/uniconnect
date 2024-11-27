@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import { BiCheckCircle, BiComment, BiDotsVerticalRounded, BiShare } from "react-icons/bi";
@@ -14,85 +15,89 @@ import { selectUser } from "../redux/slices/user/selectors";
 
 export default function Post({ data }: { data: PostType }) {
   const [showReactions, setShowReactions] = useState(false);
+  const [comment, setComment] = useState(""); // Input for new comments
+  const [comments, setComments] = useState<string[]>(data.comments_by || []); // Display existing comments
   const user: User = useSelector(selectUser);
   const userId = user.userId;
 
   const [liked, setLiked] = useState(data.liked_by.includes(userId)); // Check if the user has already liked the post
 
   const updateLikeCount = async () => {
-    // If already liked, remove like
     if (liked) {
       await updateDoc(doc(db, "posts", data.post_id), {
         like_count: data.like_count - 1,
-        liked_by: arrayRemove(userId), // Remove userId from the liked_by array
+        liked_by: arrayRemove(userId),
       });
-
-      setLiked(false); // Update local state
+      setLiked(false);
     } else {
-      // If not liked, add like
       await updateDoc(doc(db, "posts", data.post_id), {
         like_count: data.like_count + 1,
-        liked_by: arrayUnion(userId), // Add userId to the liked_by array
+        liked_by: arrayUnion(userId),
       });
-
-      setLiked(true); // Update local state
+      setLiked(true);
     }
   };
 
-  // Toggle Love reaction
   const updateLoveCount = async () => {
     if (liked) {
-      // If already loved, decrement love count and remove user from liked_by array
       await updateDoc(doc(db, "posts", data.post_id), {
         love_count: data.love_count - 1,
         liked_by: arrayRemove(userId),
       });
-      setLiked(false); // Update local state
+      setLiked(false);
     } else {
-      // If not loved, increment love count and add user to liked_by array
       await updateDoc(doc(db, "posts", data.post_id), {
         love_count: data.love_count + 1,
         liked_by: arrayUnion(userId),
       });
-      setLiked(true); // Update local state
+      setLiked(true);
     }
   };
 
-  // Toggle Laugh reaction
   const updateLaughCount = async () => {
     if (liked) {
-      // If already laughed, decrement laugh count and remove user from liked_by array
       await updateDoc(doc(db, "posts", data.post_id), {
         laugh_count: data.laugh_count - 1,
         liked_by: arrayRemove(userId),
       });
-      setLiked(false); // Update local state
+      setLiked(false);
     } else {
-      // If not laughed, increment laugh count and add user to liked_by array
       await updateDoc(doc(db, "posts", data.post_id), {
         laugh_count: data.laugh_count + 1,
         liked_by: arrayUnion(userId),
       });
-      setLiked(true); // Update local state
+      setLiked(true);
     }
   };
 
-  // Toggle Celebration reaction
   const updateCelebrationCount = async () => {
     if (liked) {
-      // If already celebrated, decrement celebration count and remove user from liked_by array
       await updateDoc(doc(db, "posts", data.post_id), {
         celebrations_count: data.celebrations_count - 1,
         liked_by: arrayRemove(userId),
       });
-      setLiked(false); // Update local state
+      setLiked(false);
     } else {
-      // If not celebrated, increment celebration count and add user to liked_by array
       await updateDoc(doc(db, "posts", data.post_id), {
         celebrations_count: data.celebrations_count + 1,
         liked_by: arrayUnion(userId),
       });
-      setLiked(true); // Update local state
+      setLiked(true);
+    }
+  };
+
+  const handleAddComment = async () => {
+    if (comment.trim() === "") return;
+
+    try {
+      await updateDoc(doc(db, "posts", data.post_id), {
+        comment_count: data.comment_count + 1,
+        comments_by: arrayUnion(`${user.firstName}${user.lastName}: ${comment}`),
+      });
+      setComments((prev) => [...prev, `${user.firstName}${user.lastName}: ${comment}`]);
+      setComment(""); // Clear the input
+    } catch (error) {
+      console.error("Error adding comment:", error);
     }
   };
 
@@ -137,11 +142,11 @@ export default function Post({ data }: { data: PostType }) {
       <div className="flex justify-between gap-10 pt-5 px-2 pb-5">
         <div className="relative">
           <div className="relative flex p-2 h-10">
-            {data.like_count !== 0 &&  (
-              <IoMdThumbsUp className="text-blue-500 h-8 w-8  p-1 bg-white rounded-full" />
+            {data.like_count !== 0 && (
+              <IoMdThumbsUp className="text-blue-500 h-8 w-8 p-1 bg-white rounded-full" />
             )}
             {data.love_count !== 0 && (
-              <HiHeart className="text-red-500  h-6 w-6  bg-white rounded-full" />
+              <HiHeart className="text-red-500 h-6 w-6 bg-white rounded-full" />
             )}
             {data.celebrations_count !== 0 && (
               <MdCelebration className="text-green-500 h-8 w-8 p-1 bg-white rounded-full" />
@@ -201,8 +206,34 @@ export default function Post({ data }: { data: PostType }) {
             </div>
             <h1 className="text-xs text-gray-500">
               {data.comment_count} Comments
-            </h1>    
+            </h1>
           </div>
+        </div>
+      </div>
+
+      {/* Comment Section */}
+      <div className="px-2 py-4 border-t border-gray-300">
+        <div className="flex items-center gap-2 mb-3">
+          <input
+            type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Add a comment..."
+            className="flex-grow px-4 py-2 border rounded-lg focus:outline-none"
+          />
+          <button
+            onClick={handleAddComment}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          >
+            Post
+          </button>
+        </div>
+        <div className="flex flex-col gap-2">
+          {comments.map((c, index) => (
+            <div key={index} className="text-sm text-gray-700">
+              {c}
+            </div>
+          ))}
         </div>
       </div>
     </div>
